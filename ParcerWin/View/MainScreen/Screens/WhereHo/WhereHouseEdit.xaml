@@ -1,0 +1,317 @@
+﻿<Page x:Class="ParcerWin.View.MainScreen.Screens.WhereHo.WhereHouseEdit"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ParcerWin.View.MainScreen.Screens.WhereHo"
+      mc:Ignorable="d" 
+      d:DesignHeight="1000" d:DesignWidth="1575"
+      Title="WhereHouseEdit">
+
+    <Page.Resources>
+        <FontFamily x:Key="font" >/Fonts/#Montserrat</FontFamily>
+
+        <Style TargetType="{x:Type Button}"
+               x:Key="ButtonCancel">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontFamily" Value="{StaticResource font}"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Margin" Value="25, 0, 0, 0"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                BorderBrush="White"
+                                Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Name="content"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}"
+               x:Key="ButtonSelect">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontFamily" Value="{StaticResource font}"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+            <Setter Property="Foreground" Value="#0A1D4E"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Name="content"/>
+                        </Grid>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style TargetType="{x:Type Button}"
+               x:Key="ButtonSave">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontFamily" Value="{StaticResource font}"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#485EAA"/>
+            <Setter Property="Margin" Value="25, 0, 0, 0"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                BorderBrush="White"
+                                Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Name="content"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}"
+               x:Key="Text">
+            <Setter Property="Foreground" Value="#0A1D4E"/>
+            <Setter Property="FontFamily" Value="{StaticResource font}"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+        </Style>
+        
+        <Style TargetType="{x:Type TextBox}"
+               x:Key="BigInputTextBox">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border 
+                                CornerRadius="10"
+                                Padding="3"
+                                Background="#F2F5FF">
+                            <TextBox Grid.Row="0" 
+                                     Text="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     BorderThickness="0"
+                                     TextWrapping="Wrap"
+                                     FontFamily="{StaticResource font}"
+                                     FontSize="18"
+                                     FontWeight="Regular"
+                                     Background="#F2F5FF"
+                                     TabIndex="{TemplateBinding TabIndex}"
+                                     Padding="5" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="Склад" 
+                   Foreground="White"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   FontSize="42"
+                   FontFamily="{StaticResource font}" 
+                   FontWeight="Regular"
+                   Margin="25, 30, 0, 30"/>
+        <Border Grid.Row="1"
+                Background="White"
+                CornerRadius="30, 0,  0, 0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition />
+                    <RowDefinition Height="110"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <Grid Width="160">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Button Content="Общие" 
+                                Grid.Row="0"
+                                Style="{StaticResource ButtonSelect}" 
+                                Click="Total_Click" />
+                        <Canvas Grid.Row="1" 
+                                Height="3" 
+                                Width="100" 
+                                VerticalAlignment="Top" 
+                                Name="totalLn">
+                            <Line X1="0" Y1="2"
+                                  X2="100" Y2="2"
+                                  Stroke="#0A1D4E"
+                                  StrokeThickness="2" />
+                        </Canvas>
+                    </Grid>
+                    <Grid Width="250">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Button Content="Химический состав" 
+                                Grid.Row="0"
+                                Style="{StaticResource ButtonSelect}" 
+                                Click="Chemistry_Click" />
+                        <Canvas Grid.Row="1" 
+                                Height="3" 
+                                Width="240" 
+                                VerticalAlignment="Top" 
+                                Name="chemistryLn"
+                                Visibility="Hidden">
+                            <Line X1="0" Y1="2"
+                                  X2="240" Y2="2"
+                                  Stroke="#0A1D4E"
+                                  StrokeThickness="2" />
+                        </Canvas>
+                    </Grid>
+                    <Grid Width="290">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Button Content="Физические свойства" 
+                                Grid.Row="0"
+                                Style="{StaticResource ButtonSelect}"
+                                Click="Phis_Click" />
+                        <Canvas Grid.Row="1" 
+                                Height="3" 
+                                Width="270" 
+                                VerticalAlignment="Top" 
+                                Name="PhisLn"
+                                Visibility="Hidden">
+                            <Line X1="0" Y1="2"
+                                  X2="270" Y2="2"
+                                  Stroke="#0A1D4E"
+                                  StrokeThickness="2" />
+                        </Canvas>
+                    </Grid>
+                </StackPanel>
+                <Grid Grid.Row="1"
+                      Margin="100, 40, 100, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Frame Name="frmSelect"/>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="5*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       Text="Комментарий" 
+                                       Style="{StaticResource Text}"/>
+                            <TextBox Grid.Row="1"
+                                     Name="tbComment"
+                                     Text="{Binding Path=Comment}"
+                                     Style="{StaticResource BigInputTextBox}"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" Margin="0, 10, 0, 10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Image Name="tbPhoto1" 
+                               Grid.Row="0" 
+                               Grid.Column="0" 
+                               Margin="5, 5, 5, 5" 
+                               HorizontalAlignment="Right"/>
+                                <Image Name="tbPhoto2" 
+                               Grid.Row="0" 
+                               Grid.Column="1" 
+                               Margin="5, 5, 5, 5" 
+                               HorizontalAlignment="Center"/>
+                                <Image Name="tbPhoto3" 
+                               Grid.Row="0" 
+                               Grid.Column="2" 
+                               Margin="5, 5, 5, 5" 
+                               HorizontalAlignment="Left"/>
+                                <Image Name="tbPhoto4" 
+                               Grid.Row="1" 
+                               Grid.Column="0" 
+                               Margin="5, 5, 5, 5" 
+                               HorizontalAlignment="Right"/>
+                                <Image Name="tbPhoto5" 
+                               Grid.Row="1" 
+                               Grid.Column="1" 
+                               Margin="5, 5, 5, 5" 
+                               HorizontalAlignment="Center"/>
+                                <Image Name="tbPhoto6" 
+                               Grid.Row="1" 
+                               Grid.Column="2" 
+                               Margin="5, 5, 5, 5" 
+                               HorizontalAlignment="Left"/>
+                            </Grid>
+                            <Button Content="Скачать" 
+                                    Grid.Row="2" 
+                                    Style="{StaticResource ButtonSave}"
+                                    Margin="0"
+                                    Name="btnDownload"
+                                    Visibility="Hidden"
+                                    Click="SaveImages_Click"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <StackPanel Grid.Row="2" 
+                            Orientation="Horizontal" 
+                            FlowDirection="RightToLeft">
+                    <Button Content="Сохранить"
+                            Style="{StaticResource ButtonSave}" 
+                            Click="Save_Click"/>
+                    <Button Content="Отменить"
+                            Style="{StaticResource ButtonCancel}" 
+                            Click="Cancel_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

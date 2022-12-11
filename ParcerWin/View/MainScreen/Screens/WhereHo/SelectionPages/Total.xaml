@@ -1,0 +1,486 @@
+﻿<Page x:Class="ParcerWin.View.MainScreen.Screens.WhereHo.SelectionPages.Total"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ParcerWin.View.MainScreen.Screens.WhereHo.SelectionPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="1000" d:DesignWidth="1000"
+      Background="White"
+      Title="Total">
+    <Page.Resources>
+        <FontFamily x:Key="font" >/Fonts/#Montserrat</FontFamily>
+        
+        <Style TargetType="{x:Type TextBlock}"
+               x:Key="Text">
+            <Setter Property="Foreground" Value="#0A1D4E"/>
+            <Setter Property="FontFamily" Value="{StaticResource font}"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+            <Setter Property="Padding" Value="10, 0, 0, 0"/>
+        </Style>
+
+        <ControlTemplate x:Key="validationFailed">
+            <StackPanel Orientation="Vertical">
+                <Border BorderBrush="Transparent">
+                    <AdornedElementPlaceholder />
+                </Border>
+                <Separator Margin="10, 0, 50, 0"
+                           Height="2"
+                           Width="Auto"
+                           HorizontalAlignment="Stretch"                
+                           Background="Red" />
+            </StackPanel>
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type TextBox}"
+               x:Key="InputTextBox">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border 
+                                CornerRadius="10"
+                                Padding="3, 3, 3, 3"
+                                HorizontalAlignment="Stretch"
+                                Margin="0, 10, 40, 0"
+                                Background="#F2F5FF">
+                            <TextBox 
+                                     Text="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     BorderThickness="0" 
+                                     FontFamily="{StaticResource font}"
+                                     FontSize="18"
+                                     FontWeight="Regular"
+                                     TabIndex="{TemplateBinding TabIndex}"
+                                     Background="#F2F5FF"
+                                     Padding="5, 0, 0, 0"
+                                     VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="ComboBoxToggleButtonStyle"
+                 TargetType="{x:Type ToggleButton}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border x:Name="Border"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="10" >
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="#F2F5FF"/>
+                    </Border.BorderBrush>
+                    <Border.Background>
+                        <SolidColorBrush Color="#F2F5FF"/>
+                    </Border.Background>
+                </Border>
+                <Border Grid.Column="0"
+                        BorderThickness="0"
+                        CornerRadius="10">
+                    <Border.Background>
+                        <SolidColorBrush Color="#F2F5FF"/>
+                    </Border.Background>
+                </Border>
+                <Path x:Name="Arrow"
+                      Grid.Column="1"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z" 
+                      Fill="#0A1D4E">
+                </Path>
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="SimpleComboBoxStyle"
+               TargetType="{x:Type ComboBox}">
+
+            <Setter Property="FontFamily" 
+                    Value="{StaticResource font}" />
+            <Setter Property="FontSize" 
+                    Value="18" />
+            <Setter Property="FontWeight" 
+                    Value="Regular" />
+            <Setter Property="Margin" 
+                    Value="0, 10, 40, 0" />
+            <Setter Property="SnapsToDevicePixels"
+                    Value="true" />
+            <Setter Property="OverridesDefaultStyle"
+                    Value="true" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                    Value="Auto" />
+            <Setter Property="ScrollViewer.CanContentScroll"
+                    Value="true" />
+            <Setter Property="MinWidth"
+                    Value="120" />
+            <Setter Property="MinHeight"
+                    Value="20" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <ToggleButton x:Name="ToggleButton"
+                                            Template="{StaticResource ComboBoxToggleButtonStyle}"
+                                            Grid.Column="2"
+                                            Focusable="false"
+                                            ClickMode="Press"
+                                            IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <ContentPresenter x:Name="ContentSite"
+                                                IsHitTestVisible="False"
+                                                Content="{TemplateBinding SelectionBoxItem}"
+                                                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                Margin="8, 3, 23, 3"
+                                                VerticalAlignment="Stretch"
+                                                HorizontalAlignment="Left">
+                            </ContentPresenter>
+                            <TextBox x:Name="PART_EditableTextBox"
+                                       Style="{x:Null}"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Bottom"
+                                       Margin="3,3,23,3"
+                                       Focusable="True"
+                                       Background="Transparent"
+                                       Visibility="Hidden"
+                                       IsReadOnly="{TemplateBinding IsReadOnly}" >
+                                <TextBox.Template>
+                                    <ControlTemplate TargetType="TextBox" >
+                                        <Border Name="PART_ContentHost" Focusable="False" />
+                                    </ControlTemplate>
+                                </TextBox.Template>
+                            </TextBox>
+                            <Popup x:Name="Popup"
+                                     Placement="Bottom"
+                                     IsOpen="{TemplateBinding IsDropDownOpen}"
+                                     AllowsTransparency="True"
+                                     Focusable="False"
+                                     PopupAnimation="Slide">
+                                <Grid x:Name="DropDown"
+                                      SnapsToDevicePixels="True"
+                                      MinWidth="{TemplateBinding ActualWidth}"
+                                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder"
+                                            BorderThickness="0"
+                                            CornerRadius="10">
+                                        <Border.Background>
+                                            <SolidColorBrush Color="#F2F5FF" />
+                                        </Border.Background>
+                                    </Border>
+                                    <ScrollViewer Margin="4,6,4,6"
+                                                  SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True"
+                                                    KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems"
+                                     Value="false">
+                                <Setter TargetName="DropDownBorder"
+                                        Property="MinHeight"
+                                        Value="95" />
+                            </Trigger>
+                            <Trigger Property="IsGrouping"
+                                     Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll"
+                                        Value="false" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <FontFamily x:Key="font1">/Fonts/#Montserrat</FontFamily>
+       
+    </Page.Resources>
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0"
+                            Grid.Column="0">
+            <TextBlock Text="Дата поступления"
+                               Style="{StaticResource Text}"/>
+            <TextBox Name="tbDate"
+                     IsReadOnly="True"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="SupplyDate" StringFormat="dd.MM.yyyy"  NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1"
+                            Grid.Column="0">
+            <TextBlock Text="Марка стали" 
+                               Style="{StaticResource Text}"/>
+            <TextBox Name="tbGrade"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="Grade" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2"
+                            Grid.Column="0">
+            <TextBlock Text="Прокат" 
+                               Style="{StaticResource Text}"/>
+            <TextBox Name="tbDestination"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="Destination" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3"
+                            Grid.Column="0">
+            <TextBlock Text="Номер сертификата" 
+                               Style="{StaticResource Text}"/>
+            <!--<ComboBox Name="tbNumberCertificate"
+                      IsEnabled="False"
+                      IsTextSearchEnabled="True"
+                      Style="{StaticResource SimpleComboBoxStyle}" 
+                      SelectionChanged="tbNumberCertificate_SelectionChanged" />-->
+            <TextBox Name="tbNumberCertificate"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="NumberOfCertificate" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="4"
+                    Grid.Column="0">
+            <TextBlock Text="Ширина, мм" 
+                               Style="{StaticResource Text}"/>
+            <TextBox Name="tbWidth"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="Width" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="5"
+                            Grid.Column="0">
+            <TextBlock Text="Толщина, мм"
+                               Style="{StaticResource Text}"/>
+            <TextBox Name="tbThickness"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="Thickness" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="6"
+                            Grid.Column="0">
+            <TextBlock Text="Масса брутто, кг"
+                               Style="{StaticResource Text}"/>
+            <TextBox Name="tbGross"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="Gros" NotifyOnValidationError="True" StringFormat="F0">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="7"
+                            Grid.Column="0">
+            <TextBlock Text="Масса нетто, кг"
+                               Style="{StaticResource Text}"/>
+            <TextBox Name="tbNet"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="Net" NotifyOnValidationError="True" StringFormat="F0">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="0"
+                            Grid.Column="1">
+            <TextBlock Text="Вытяжка" 
+                               Style="{StaticResource Text}"/>
+            <TextBox Name="tbCategoryOfDrawing"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="CategoryOfDrawing" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1"
+                            Grid.Column="1">
+            <TextBlock Text="Отн. удлинение" 
+                               Style="{StaticResource Text}"/>
+            <TextBox Name="tbElognation"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="Elongation" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2"
+                            Grid.Column="1">
+            <TextBlock Text="Себестоимость"
+                               Style="{StaticResource Text}"/>
+            <TextBox Name="tbPrice"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="Price" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3"
+                            Grid.Column="1">
+            <TextBlock Text="Сорт"
+                               Style="{StaticResource Text}"/>
+            <TextBox Name="tbSort"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="Sort" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="4"
+                            Grid.Column="1">
+            <TextBlock Text="Поставщик" 
+                               Style="{StaticResource Text}"/>
+            <!--<ComboBox Name="tbSupplier" 
+                      IsEnabled="False"
+                      Style="{StaticResource SimpleComboBoxStyle}" />-->
+            <TextBox Name="tbSupplier"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="Supplier" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="5"
+                            Grid.Column="1">
+            <TextBlock Text="Класс покрытия" 
+                               Style="{StaticResource Text}"/>
+            <TextBox Name="tbClass"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="CoatingClass" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="6"
+                            Grid.Column="1">
+            <TextBlock Text="Тип покрытия" 
+                               Style="{StaticResource Text}"/>
+            <TextBox Name="tbCoatingType"
+                     Style="{StaticResource InputTextBox}"
+                     Validation.ErrorTemplate="{StaticResource validationFailed}"
+                     Validation.Error="TextBox_Error">
+                <TextBox.Text>
+                    <Binding Path="CoatingType" NotifyOnValidationError="True">
+                        <Binding.ValidationRules>
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+    </Grid>
+</Page>

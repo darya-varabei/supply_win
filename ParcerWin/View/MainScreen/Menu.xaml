@@ -1,0 +1,103 @@
+﻿<Page x:Class="ParcerWin.View.MainScreen.Menu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ParcerWin.View.MainScreen"
+      mc:Ignorable="d" 
+      d:DesignHeight="1000" d:DesignWidth="225"
+      Title="Menu">
+
+    <Page.Resources>
+        <FontFamily x:Key="font" >/Fonts/#Montserrat</FontFamily>
+
+        <Style TargetType="{x:Type TextBlock}"
+               x:Key="Text">
+            <Setter Property="FontFamily" Value="{StaticResource font}"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="25, 0, 0, 0" />
+        </Style>
+
+        <Style TargetType="{x:Type Button}"
+               x:Key="ButtonStyle">
+            <Setter Property="Width" Value="225"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="FontFamily" Value="{StaticResource font}"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Name="border"
+                                BorderThickness="0"
+                                Padding="0, 0, 0, 0"
+                                Background="{TemplateBinding Background}">
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <StackPanel Orientation="Vertical">
+        <TextBlock Text="SupplyIO"
+                   Foreground="White"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   FontSize="42"
+                   FontFamily="{StaticResource font}" 
+                   FontWeight="Regular"
+                   Margin="0, 30, 0, 90"
+                   Padding="25, 0, 0, 0"/>
+        <Grid Name="grdbtnWerehouse">
+            <Button Content="Склад"
+                Name="btnWerehouse"
+                Style="{StaticResource ButtonStyle}" 
+                Click="Wherehouse_Click" Height="50" VerticalAlignment="Top"/>
+            <TextBlock Text="Склад" 
+                       Cursor="Hand"
+                       Style="{StaticResource Text}"
+                       MouseLeftButtonDown="Wherehouse_Click"/>
+        </Grid>
+        <Grid Name="grdbtnCutting">
+            <Button Content="Раскрой"
+                Name="btnCutting"
+                Style="{StaticResource ButtonStyle}" 
+                Click="btnCutting_Click" Height="50" VerticalAlignment="Top"/>
+            <TextBlock Text="Раскрой" 
+                       Cursor="Hand"
+                       Style="{StaticResource Text}"
+                       MouseLeftButtonDown="btnCutting_Click" HorizontalAlignment="Stretch" Margin="25,0,103,0"/>
+        </Grid>
+        <Grid Name="grdbtnUsers">
+            <Button Content="Пользователи"
+                Style="{StaticResource ButtonStyle}"
+                Name="btnUsers"
+                Click="Users_Click"/>
+            <TextBlock Text="Пользователи" 
+                       Cursor="Hand"
+                       Style="{StaticResource Text}"
+                       MouseLeftButtonDown="Users_Click"/>
+        </Grid>
+        <Grid Name="grdbtnExit">
+            <Button Content="Выйти"
+                Name="btnExit"
+                Style="{StaticResource ButtonStyle}" 
+                Click="Exit_Click"/>
+            <TextBlock Text="Выйти" 
+                       Style="{StaticResource Text}"
+                       Cursor="Hand"
+                       MouseLeftButtonDown="Exit_Click"/>
+        </Grid>
+    </StackPanel>
+</Page>

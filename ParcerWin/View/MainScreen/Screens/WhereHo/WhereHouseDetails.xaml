@@ -1,0 +1,316 @@
+﻿<Page x:Class="ParcerWin.View.MainScreen.Screens.WhereHo.WhereHouseDetails"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ParcerWin.View.MainScreen.Screens.WhereHo"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1122"
+      Title="WhereHouseDetails">
+
+    <Page.Resources>
+        <FontFamily x:Key="font" >/Fonts/#Montserrat</FontFamily>
+
+        <Style TargetType="{x:Type Button}"
+               x:Key="ButtonCancel">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontFamily" Value="{StaticResource font}"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Margin" Value="0, 0, 25, 0"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                BorderBrush="White"
+                                Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Name="content"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110"/>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="110"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="Склад" 
+                   Foreground="White"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   FontSize="42"
+                   FontFamily="{StaticResource font}" 
+                   FontWeight="Regular"
+                   Margin="25, 30, 0, 30"/>
+        <TextBlock Grid.Row="1" 
+                   Name="tbCertNumb"
+                   Text="№ Сертификата" 
+                   HorizontalAlignment="Right" 
+                   Foreground="White"
+                   FontFamily="{StaticResource font}" 
+                   FontSize="28"
+                   FontWeight="Regular"
+                   Margin="0, 0, 25, 0"
+                   VerticalAlignment="Center"/>
+        <DockPanel Grid.Row="2"
+                   LastChildFill="False">
+            <TextBlock Grid.Row="1" 
+                       Text="Общие показатели" 
+                       DockPanel.Dock="Left"
+                       Foreground="White"
+                       FontFamily="{StaticResource font}" 
+                       FontSize="28"
+                       FontWeight="Regular"
+                       Margin="25, 0, 0, 0"
+                       VerticalAlignment="Center"/>
+            
+            <TextBlock Grid.Row="1" 
+                       Name="tbCaseNumb"
+                       Text="№ упаковки" 
+                       DockPanel.Dock="Right"
+                       Foreground="White"
+                       FontFamily="{StaticResource font}" 
+                       FontSize="32"
+                       FontWeight="Regular"
+                       Margin="0, 0, 25, 0"
+                       VerticalAlignment="Center"/>
+        </DockPanel>
+        <DataGrid Grid.Row="3"
+                  Name="dgrdTotal"
+                  AutoGenerateColumns = "False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  HorizontalAlignment="Left"
+                  Margin="25, 0, 25, 0"
+                  VerticalAlignment="Top"
+                  MaxWidth="1500"
+                  Background="White"
+                          BorderThickness="0"
+                          VerticalGridLinesBrush="Transparent" 
+                          HorizontalGridLinesBrush="Transparent"
+                          RowHeaderWidth="0">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="FontFamily" Value="Montserrat" />
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Height" Value="25"/>
+                    <Setter Property="FontWeight" Value="Regular"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата поступления"
+      
+                                    Binding="{Binding SupplyDate, StringFormat=dd.MM.yyyy}"/>
+                <DataGridTextColumn Header="Поставщик"
+        
+                                    Binding="{Binding Supplier}"/>
+                <DataGridTextColumn Header="Марка стали"
+   
+                                    Binding="{Binding Grade}"/>
+                <DataGridTextColumn Header="Ширина, мм"
+      
+                                    Binding="{Binding Width}"/>
+                <DataGridTextColumn Header="Толщина, мм"
+
+                                    Binding="{Binding Thickness}"/>
+                <DataGridTextColumn Header="Масса брутто, кг"
+
+                                    Binding="{Binding Gros, StringFormat=F0}"/>
+                <DataGridTextColumn Header="Масса нетто, кг"
+
+                                    Binding="{Binding Net, StringFormat=F0}"/>
+                <DataGridTextColumn Header="Класс покрытия"
+
+                                    Binding="{Binding CoatingType}"/>
+                <DataGridTextColumn Header="Вытяжка/Отн. удлинение"
+
+                                    Binding="{Binding CategoryOfDrawing}"/>
+                <DataGridTextColumn Header="Сорт"
+
+                                    Binding="{Binding Sort}"/>
+                <DataGridTextColumn Header="Себестоимость"
+                                    Binding="{Binding Price}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Grid.Row="4" 
+                   Text="Химический состав" 
+                   DockPanel.Dock="Left"
+                   Foreground="White"
+                   FontFamily="{StaticResource font}" 
+                   FontSize="28"
+                   FontWeight="Regular"
+                   Margin="25, 0, 0, 0"
+                   VerticalAlignment="Center"/>
+        <DataGrid Grid.Row="5"
+                  Name="dgrdChemical"
+                  AutoGenerateColumns = "False"
+                  CanUserAddRows="False"
+                  HorizontalAlignment="Left"
+                  IsReadOnly="True"
+                  Margin="25, 0, 25, 0"
+                  VerticalAlignment="Top"
+                                   Background="White"
+                          BorderThickness="0"
+                          VerticalGridLinesBrush="Transparent" 
+                          HorizontalGridLinesBrush="Transparent"
+                          RowHeaderWidth="0">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="FontFamily" Value="Montserrat" />
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Height" Value="25"/>
+                    <Setter Property="FontWeight" Value="Regular"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№ плавки"
+                                    Width="100"
+                                    Binding="{Binding NumberOfHeat}"/>
+                <DataGridTextColumn Header="C"
+                                    Width="40"
+                                    Binding="{Binding C}"/>
+                <DataGridTextColumn Header="Si"
+                                    Width="40"
+                                    Binding="{Binding Si}"/>
+                <DataGridTextColumn Header="Mn"
+                                    Width="40"
+                                    Binding="{Binding Mn}"/>
+                <DataGridTextColumn Header="S"
+                                    Width="40"
+                                    Binding="{Binding S}"/>
+                <DataGridTextColumn Header="P"
+                                    Width="40"
+                                    Binding="{Binding P}"/>
+                <DataGridTextColumn Header="Al"
+                                    Width="40"
+                                    Binding="{Binding Al}"/>
+                <DataGridTextColumn Header="Cr"
+                                    Width="40"
+                                    Binding="{Binding Cr}"/>
+                <DataGridTextColumn Header="Ni"
+                                    Width="40"
+                                    Binding="{Binding Ni}"/>
+                <DataGridTextColumn Header="Cu"
+                                    Width="40"
+                                    Binding="{Binding Cu}"/>
+                <DataGridTextColumn Header="Ti"
+                                    Width="40"
+                                    Binding="{Binding Ti}"/>
+                <DataGridTextColumn Header="N"
+                                    Width="40"
+                                    Binding="{Binding N2}"/>
+                <DataGridTextColumn Header="As"
+                                    Width="40"
+                                    Binding="{Binding As}"/>    
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Grid.Row="6" 
+                   Text="Результаты испытаний" 
+                   DockPanel.Dock="Left"
+                   Foreground="White"
+                   FontFamily="{StaticResource font}" 
+                   FontSize="28"
+                   FontWeight="Regular"
+                   Margin="25, 0, 0, 0"
+                   VerticalAlignment="Center"/>
+        <DataGrid Grid.Row="7"
+                  Name="dgrdResults"
+                  AutoGenerateColumns = "False"
+                  CanUserAddRows="False"
+                  HorizontalAlignment="Left"
+                  IsReadOnly="True"
+                  Margin="25, 0, 25, 0"
+                  VerticalAlignment="Top"
+                  Background="White"
+                          BorderThickness="0"
+                          VerticalGridLinesBrush="Transparent" 
+                          HorizontalGridLinesBrush="Transparent"
+                          RowHeaderWidth="0">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="FontFamily" Value="Montserrat" />
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Height" Value="25"/>
+                    <Setter Property="FontWeight" Value="Regular"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№ упаковки"
+
+                                    Binding="{Binding Batch}"/>
+                <DataGridTextColumn Header="Характер кромки"
+
+                                    Binding="{Binding TrimOfEdge}"/>
+                <DataGridTextColumn Header="Времен. сопротивл."
+
+                                    Binding="{Binding TemporalResistance}"/>
+                <!--<DataGridTextColumn Header="Относ. удлинение"
+     
+                                    Binding="{Binding Elongation}"/>-->
+                <DataGridTextColumn Header="Толщина покрытия"
+
+                                    Binding="{Binding AverageCoverageThickness}"/>
+                <DataGridTextColumn Header="Предел прочности"
+         
+                                    Binding="{Binding TensilePoint}"/>
+                <DataGridTextColumn Header="Зерно феррита"
+                              
+                                    Binding="{Binding GrainSize}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="8"
+                Content="Назад"
+                Style="{StaticResource ButtonCancel}" 
+                Click="Cancel_Click"/>
+    </Grid>
+</Page>
